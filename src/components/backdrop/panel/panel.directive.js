@@ -1,11 +1,11 @@
 'use strict';
 
 angular.module('trulescent')
-  .directive('panel', function ( ) {
+  .directive('tlscPanel', function ( ) {
     return {
       restrict:'EA',
       replace:'true',
-      templateUrl:'/components/backdrop/panel/panel.html',
+      templateUrl:'components/backdrop/panel/panel.html',
       link: function ( $scope, $element, $attrs ) {
 
         $scope.$watch( $attrs.coordinates , function() {
