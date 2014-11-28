@@ -56,4 +56,24 @@ angular.module('trulescent')
     angular.forEach($scope.awesomeThings, function(awesomeThing) {
       awesomeThing.rank = Math.random();
     });
+
+    $scope.steps = [
+      {
+        content:'yop',
+        placement: 'top',
+        location: {
+          selector:'.thumbnail'
+        }
+      },
+      {
+        content:'jumbotron',
+        placement:'bottom',
+        location: {
+          selector:'.jumbotron'
+        }
+      }
+    ];
+    $scope.go = function() {
+        $scope.startTlsc = true;
+    }
   });

@@ -17,18 +17,20 @@
     <!-- build:css({.tmp,src}) styles/app.css -->
     <link rel="stylesheet" href="app/index.css">
     <link rel="stylesheet" href="components/backdrop/backdrop.css">
+    <link rel="stylesheet" href="components/trulescent/trulescent.css">
+    <link rel="stylesheet" href="components/tooltip/tooltip.css">
     <!-- endbuild -->
 
     <!-- build:js scripts/modernizr.js -->
     <script src="../bower_components/modernizr/modernizr.js"></script>
     <!-- endbuild -->
   </head>
-  <body>
+  <body ng-controller="MainCtrl">
     <!--[if lt IE 10]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
 
-    <div class="container" ng-controller="MainCtrl">
+    <div class="container">
 
       <div class="jumbotron">
         <h1>'Allo, 'Allo!</h1>
@@ -38,6 +40,8 @@
         </p>
         <p><a class="btn" ng-href="#">Splendid!</a></p>
       </div>
+
+      <button class="btn" ng-click="go()">Go</button>
 
       <div class="col" ng-repeat="awesomeThing in awesomeThings | orderBy:'rank'">
         <div class="thumbnail">
@@ -58,7 +62,7 @@
 
     </div>
 
-    <div ng-include="'/components/backdrop/backdrop.html'"></div>
+    <div trulescent steps="steps" start="startTlsc"></div>
 
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
@@ -87,6 +91,9 @@
     <script src="app/main/main.controller.js"></script>
     <script src="components/backdrop/backdrop.controller.js"></script>
     <script src="components/backdrop/panel/panel.directive.js"></script>
+    <script src="components/tooltip/tooltip.directive.js"></script>
+    <script src="components/trulescent/trulescent.directive.js"></script>
+    <script src="components/trulescent/trulescent.controller.js"></script>
 
     <!-- inject:partials -->
     <!-- angular templates will be automaticaly converted in js and inserted here -->
