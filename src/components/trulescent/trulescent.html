@@ -1,4 +1,4 @@
-<div class="tlsc-main">
-	<div ng-include="'/components/backdrop/backdrop.html'" ng-controller="BackdropCtrl" ng-show="start" animate="{enter:'tlsc-animate-enter',leave:'tlsce-animate-leave'}"></div>
-  <div tlsc-tooltip content="content" placement="placement"></div>
+<div class="tlsc-main" ng-show="start">
+	<div ng-include="'/components/backdrop/backdrop.html'" ng-controller="BackdropCtrl"></div>
+  <div tlsc-tooltip class="tlsc-tooltip-container" step="step"></div>
 </div>
