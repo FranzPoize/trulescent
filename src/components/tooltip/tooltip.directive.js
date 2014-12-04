@@ -1,57 +1,86 @@
 'use strict';
 
 angular.module('trulescent')
-  .directive('tlscTooltip', function ( ) {
+  .directive('tlscTooltip', function ( $timeout, tlscTools, $compile, $templateCache ) {
     return {
       restrict : 'EA',
-      scope: { content : '=',placement : '='},
-      replace:'true',
+      scope : {step:'='},
       templateUrl : 'components/tooltip/tooltip.html',
       link: function ( $scope, $element, $attrs ) {
 
-        $scope.nextStep = function() {
+        $scope.nextStep = function () {
           $scope.$emit('tlsc.next');
         };
 
-        $scope.$watch('placement',function(newValue,oldValue) {
+        $scope.prevStep = function () {
+          $scope.$emit('tlsc.prev');
+        };
+
+        $scope.stop = function () {
+          $scope.$emit('tlsc.end');
+        };
+
+        function moveTooltip (newValue,selector) {
+          var cssValues,
+            targetElement = document.querySelector(selector),
+            elAbsPosition = tlscTools.cumulativeOffset(targetElement);
+
+          switch( newValue ) {
+            case 'top' :
+              cssValues = {
+                bottom: (window.innerHeight - elAbsPosition.top + 10) + 'px',
+                left: (elAbsPosition.left) + 'px',
+                top: 'auto',
+                right: 'auto'
+              }
+              break;
+            case 'right':
+              cssValues = {
+                top: (elAbsPosition.top) + 'px',
+                left: (window.innerWidth - elAbsPosition.left - targetElement.clientWidth - 10) + 'px',
+                bottom: 'auto',
+                right: 'auto'
+              }
+              break;
+            case 'bottom' :
+              cssValues = {
+                top: (elAbsPosition.top + targetElement.clientHeight + 10) + 'px',
+                left: (elAbsPosition.left) + 'px',
+                bottom: 'auto',
+                right: 'auto'
+              }
+              break;
+            case 'left' :
+              cssValues = {
+                top: (elAbsPosition.top) + 'px',
+                right: (window.innerWidth - elAbsPosition.left - targetElement.clientWidth + 10) + 'px',
+                bottom: 'auto',
+                left: 'auto'
+              }
+              break;
+          }
+          cssValues.width = targetElement.clientWidth;
+          cssValues.height = targetElement.clientHeight;
+          $element.css(cssValues);
+        }
+
+        $scope.$watch( 'step' , function ( newValue, oldValue) {
           if ( angular.isDefined( newValue ) ) {
-            var cssValues;
-            switch( newValue ) {
-              case 'top' :
-                cssValues = {
-                  bottom: (window.innerHeight- document.querySelector('#tlsc-top-panel').clientHeight + 10) + 'px',
-                  left: (document.querySelector('#tlsc-left-panel').offsetWidth) + 'px',
-                  top: 'auto',
-                  right: 'auto'
-                }
-                break;
-              case 'right':
-                cssValues = {
-                  top: (document.querySelector('#tlsc-top-panel').offsetHeight) + 'px',
-                  left: (document.body.clientWidth - document.querySelector('#tlsc-left-panel').clientWidth - 10) + 'px',
-                  bottom: 'auto',
-                  right: 'auto'
-                }
-                break;
-              case 'bottom' :
-                cssValues = {
-                  top: (window.innerHeight - document.querySelector('#tlsc-bottom-panel').clientHeight + 10) + 'px',
-                  left: (document.querySelector('#tlsc-left-panel').offsetWidth) + 'px',
-                  bottom: 'auto',
-                  right: 'auto'
-                }
-                break;
-              case 'left' :
-                cssValues = {
-                  top: (document.querySelector('#tlsc-top-panel').offsetHeight) + 'px',
-                  right: (document.body.clientWidth - document.querySelector('#tlsc-left-panel') + 10) + 'px',
-                  bottom: 'auto',
-                  left: 'auto'
-                }
-                break;
+
+            if ( newValue.tooltip.template ) {
+              $scope.content = newValue.tooltip.content;
+              $element.empty().append($compile(newValue.tooltip.template)($scope));
+            } else {
+              $element.empty().append($compile($templateCache.get("components/tooltip/tooltip.html"))($scope));
             }
 
-            $element.css(cssValues);
+            $element.css('opacity',0);
+
+            $timeout( function () {
+              moveTooltip(newValue.tooltip.placement,newValue.location.selector);
+              $element.css('opacity', 1);
+            }, tlscTools.animationDurationMilli);
+
           }
         });
       }

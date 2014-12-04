@@ -1,3 +1,16 @@
 .tlsc-main {
   display:block;
+
+  -webkit-transition: opacity .2s ease;
+  transition:opacity .2s ease;
+
+  &.ng-hide {
+    opacity: 0;
+  }
+}
+
+.tlsc-element {
+  position:relative;
+  z-index:9999999 !important;
+  background-color: transparent;
 }

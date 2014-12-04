@@ -1,6 +1,8 @@
 <div class="tlsc-tooltip">
-  <div class="tlsc-content">
-    {{content}}
+  <div class="tlsc-content panel-body">
+    {{step.tooltip.content}}
   </div>
+  <button class="btn" ng-click="prevStep()">Back</button>
   <button class="btn" ng-click="nextStep()">Next</button>
+  <button class="btn" ng-click="stop()">End</button>
 </div>

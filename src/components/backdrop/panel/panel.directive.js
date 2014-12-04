@@ -8,13 +8,13 @@ angular.module('trulescent')
       templateUrl:'components/backdrop/panel/panel.html',
       link: function ( $scope, $element, $attrs ) {
 
-        $scope.$watch( $attrs.coordinates , function() {
+        $scope.$watch( 'placement' , function() {
 
-          _.each( $scope[$attrs.coordinates] , function ( coord, prop) {
+          _.each( $scope.placement , function ( coord, prop) {
             $element.css( prop, coord + 'px' );
           })
 
-        },true);
+        });
       }
     }
   });
