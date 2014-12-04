@@ -59,17 +59,52 @@ angular.module('trulescent')
 
     $scope.steps = [
       {
-        content:'yop',
-        placement: 'top',
+        tooltip: {
+          content:'yop',
+          template:'<div class="tlsc-tooltip"><div>{{content}} de la balle</div><button class="btn" ng-click="prevStep()">Back</button><button class="btn" ng-click="nextStep()">Next</button><button class="btn" ng-click="stop()">End</button></div>',
+          placement: 'top'
+        },
         location: {
           selector:'.thumbnail'
+        },
+        transition: {
+          event:'click',
+          selector:'#btn-tlsc-test'
         }
       },
       {
-        content:'jumbotron',
-        placement:'bottom',
+        tooltip: {
+          content:'jumbotron',
+          placement:'bottom',
+        },
         location: {
           selector:'.jumbotron'
+        },
+        transition: {
+          watch:'stuff',
+          selector: '#test-stuff',
+          afterValue : undefined,
+          testValue: 'caca'
+        },
+        preFn:function() {
+          console.log('pre');
+        },
+        postFn: function() {
+          console.log('post');
+        }
+      },
+      {
+        tooltip: {
+          content:'yop',
+          template:'<div class="tlsc-tooltip"><div>{{content}} de la balle</div><button class="btn" ng-click="prevStep()">Back</button><button class="btn" ng-click="nextStep()">Next</button><button class="btn" ng-click="stop()">End</button></div>',
+          placement: 'top'
+        },
+        location: {
+          selector:'.thumbnail'
+        },
+        transition: {
+          event:'click',
+          selector:'#btn-tlsc-test'
         }
       }
     ];
