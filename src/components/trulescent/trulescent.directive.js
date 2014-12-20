@@ -39,11 +39,12 @@ angular.module('trulescent')
                     ( step.transition.testValue ? newValue === step.transition.testValue : true ) ) {
 
                     transitionWatch();
-                    goToStep( ++stepIndex, stepIndex - 1 );
 
-                    targetScope[step.transition.watch] = step.transition.afterValue || targetScope[step.transition.watch];
-
+                    targetScope[step.transition.watch] = step.transition.hasOwnProperty('afterValue') ?
+                      step.transition.afterValue : targetScope[step.transition.watch];
                     step.postFn();
+
+                    goToStep( ++stepIndex, stepIndex - 1 );
                   }
                 }
               );
