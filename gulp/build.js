@@ -61,7 +61,6 @@ gulp.task('html', ['styles', 'scripts', 'partials'], function () {
       addPrefix: '../'
     }))
     .pipe(assets = $.useref.assets())
-    .pipe($.rev())
     .pipe(jsFilter)
     .pipe($.ngAnnotate())
     .pipe($.uglify({preserveComments: $.uglifySaveLicense}))
@@ -71,7 +70,6 @@ gulp.task('html', ['styles', 'scripts', 'partials'], function () {
     .pipe(cssFilter.restore())
     .pipe(assets.restore())
     .pipe($.useref())
-    .pipe($.revReplace())
     .pipe(htmlFilter)
     .pipe($.minifyHtml({
       empty: true,
