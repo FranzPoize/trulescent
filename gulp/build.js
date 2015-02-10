@@ -12,11 +12,10 @@ function handleError(err) {
 }
 
 gulp.task('styles', ['wiredep'],  function () {
-  return gulp.src('src/{app,components}/**/*.less')
+  return gulp.src('src/components/**/*.less')
     .pipe($.less({
       paths: [
         'src/bower_components',
-        'src/app',
         'src/components'
       ]
     }))
@@ -27,14 +26,14 @@ gulp.task('styles', ['wiredep'],  function () {
 });
 
 gulp.task('scripts', function () {
-  return gulp.src('src/{app,components}/**/*.js')
+  return gulp.src('src/components/**/*.js')
     .pipe($.jshint())
     .pipe($.jshint.reporter('jshint-stylish'))
     .pipe($.size());
 });
 
 gulp.task('partials', function () {
-  return gulp.src('src/{app,components}/**/*.html')
+  return gulp.src('src/components/**/*.html')
     .pipe($.minifyHtml({
       empty: true,
       spare: true,
@@ -54,13 +53,14 @@ gulp.task('html', ['styles', 'scripts', 'partials'], function () {
   var assets;
 
   return gulp.src('src/*.html')
-    .pipe($.inject(gulp.src('.tmp/{app,components}/**/*.js'), {
+    .pipe($.inject(gulp.src('.tmp/components/**/*.js'), {
       read: false,
       starttag: '<!-- inject:partials -->',
       addRootSlash: false,
       addPrefix: '../'
     }))
     .pipe(assets = $.useref.assets())
+    .pipe($.rev())
     .pipe(jsFilter)
     .pipe($.ngAnnotate())
     .pipe($.uglify({preserveComments: $.uglifySaveLicense}))
@@ -70,6 +70,7 @@ gulp.task('html', ['styles', 'scripts', 'partials'], function () {
     .pipe(cssFilter.restore())
     .pipe(assets.restore())
     .pipe($.useref())
+    .pipe($.revReplace())
     .pipe(htmlFilter)
     .pipe($.minifyHtml({
       empty: true,
