@@ -105,8 +105,6 @@ angular.module('trulescent')
               }
               break;
           }
-          cssValues.width = targetElement.clientWidth;
-          cssValues.height = targetElement.clientHeight;
           $element.css(cssValues);
         }
 
