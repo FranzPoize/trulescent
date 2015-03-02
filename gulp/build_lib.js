@@ -52,7 +52,7 @@ gulp.task('html-lib', ['styles-lib', 'scripts-lib', 'partials-lib'], function ()
    var cssFilter = $.filter('**/*.css');
 //   var assets;
 
-    return gulp.src(['src/components/**/*.js','.tmp/**/*.js','.tmp/**/*.css'])
+    return gulp.src(['src/app/index.js','src/components/**/*.js','.tmp/**/*.js','.tmp/**/*.css'])
       .pipe(jsFilter)
       .pipe($.ngAnnotate())
       .pipe($.uglify())
