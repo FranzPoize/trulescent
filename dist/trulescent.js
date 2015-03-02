@@ -83,7 +83,7 @@ angular.module('trulescent')
             case 'right':
               cssValues = {
                 top: (elAbsPosition.top) + 'px',
-                left: (window.innerWidth - elAbsPosition.left - targetElement.clientWidth - 10) + 'px',
+                left: (elAbsPosition.left - targetElement.clientWidth - 10) + 'px',
                 bottom: 'auto',
                 right: 'auto'
               }
