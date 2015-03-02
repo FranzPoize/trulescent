@@ -48,15 +48,12 @@ gulp.task('partials-lib', function () {
 });
 
 gulp.task('html-lib', ['styles-lib', 'scripts-lib', 'partials-lib'], function () {
-//   var htmlFilter = $.filter('*.html');
    var jsFilter = $.filter('**/*.js');
    var cssFilter = $.filter('**/*.css');
-//   var assets;
 
     return gulp.src(['src/app/index.js','src/components/**/*.js','.tmp/**/*.js','.tmp/**/*.css'])
       .pipe(jsFilter)
       .pipe($.ngAnnotate())
-      .pipe($.uglify())
       .pipe($.concat('trulescent.js'))
       .pipe(jsFilter.restore())
       .pipe(cssFilter)
@@ -65,62 +62,26 @@ gulp.task('html-lib', ['styles-lib', 'scripts-lib', 'partials-lib'], function ()
       .pipe(cssFilter.restore())
       .pipe(gulp.dest('dist'))
       .pipe($.size());
-//   return gulp.src('src/*.html')
-//     .pipe($.inject(gulp.src('.tmp/components/**/*.js'), {
-//       read: false,
-//       starttag: '<!-- inject:partials -->',
-//       addRootSlash: false,
-//       addPrefix: '../'
-//     }))
-//     .pipe($.rev())
-//     .pipe(jsFilter)
-//     .pipe($.ngAnnotate())
-//     .pipe($.uglify({preserveComments: $.uglifySaveLicense}))
-//     .pipe(jsFilter.restore())
-//     .pipe(cssFilter)
-//     .pipe($.csso())
-//     .pipe(cssFilter.restore())
-//     .pipe(assets.restore())
-//     .pipe($.useref())
-//     .pipe($.revReplace())
-//     .pipe(htmlFilter)
-//     .pipe($.minifyHtml({
-//       empty: true,
-//       spare: true,
-//       quotes: true
-//     }))
-//     .pipe(htmlFilter.restore())
-//     .pipe(gulp.dest('dist'))
-//     .pipe($.size());
 });
 
-// gulp.task('images', function () {
-//   return gulp.src('src/assets/images/**/*')
-//     .pipe($.cache($.imagemin({
-//       optimizationLevel: 3,
-//       progressive: true,
-//       interlaced: true
-//     })))
-//     .pipe(gulp.dest('dist/assets/images'))
-//     .pipe($.size());
-// });
+gulp.task('html-lib-min', ['styles-lib', 'scripts-lib', 'partials-lib'], function () {
+   var jsFilter = $.filter('**/*.js');
+   var cssFilter = $.filter('**/*.css');
 
-// gulp.task('fonts', function () {
-//   return gulp.src($.mainBowerFiles())
-//     .pipe($.filter('**/*.{eot,svg,ttf,woff}'))
-//     .pipe($.flatten())
-//     .pipe(gulp.dest('dist/fonts'))
-//     .pipe($.size());
-// });
-
-// gulp.task('misc', function () {
-//   return gulp.src('src/**/*.ico')
-//     .pipe(gulp.dest('dist'))
-//     .pipe($.size());
-// });
-
-// gulp.task('clean', function (done) {
-//   $.del(['.tmp', 'dist'], done);
-// });
+    return gulp.src(['src/app/index.js','src/components/**/*.js','.tmp/**/*.js','.tmp/**/*.css'])
+      .pipe(jsFilter)
+      .pipe($.ngAnnotate())
+      .pipe($.uglify())
+      .pipe($.concat('trulescent.min.js'))
+      .pipe(jsFilter.restore())
+      .pipe(cssFilter)
+      .pipe($.csso())
+      .pipe($.concatCss('trulescent.min.css'))
+      .pipe(cssFilter.restore())
+      .pipe(gulp.dest('dist'))
+      .pipe($.size());
+});
 
 gulp.task('build-lib', ['html-lib']);
+gulp.task('build-lib-min', ['html-lib-min']);
+gulp.task('build-all', ['html-lib','html-lib-min']);
