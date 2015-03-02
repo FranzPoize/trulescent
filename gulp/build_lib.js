@@ -40,7 +40,8 @@ gulp.task('partials-lib', function () {
       quotes: true
     }))
     .pipe($.ngHtml2js({
-      moduleName: 'trulescent'
+      moduleName: 'trulescent',
+      prefix:'components/'
     }))
     .pipe(gulp.dest('.tmp'))
     .pipe($.size());
