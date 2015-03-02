@@ -57,9 +57,12 @@ angular.module('trulescent')
           $scope.$broadcast( 'tlsc.backdrop.move', $scope.steps[step].location.selector );
 
           if(prevStep >= 0) {
-              angular.element(document.querySelector($scope.steps[prevStep].location.selector)).removeClass('tlsc-element');
+            var selector = $scope.steps[prevStep].location.zIndexSelector || $scope.steps[prevStep].location.selector;
+            angular.element(document.querySelector(selector)).removeClass('tlsc-element');
           }
-          angular.element(document.querySelector($scope.steps[step].location.selector)).addClass('tlsc-element');
+          var selector = $scope.steps[step].location.zIndexSelector || $scope.steps[step].location.selector;
+          angular.element(document.querySelector(selector)).addClass('tlsc-element');
+
 
           $scope.steps[step].preFn && $scope.steps[step].preFn();
 
