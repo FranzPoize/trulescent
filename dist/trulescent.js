@@ -202,6 +202,13 @@ angular.module('trulescent')
           var selector = $scope.steps[step].location.zIndexSelector || $scope.steps[step].location.selector;
           angular.element(document.querySelector(selector)).addClass('tlsc-element');
 
+          var offset = tlscTools.cumulativeOffset(document.querySelector(selector));
+
+          if (!step.noScroll) {
+            angular.element(document.querySelector('body')).animate({
+              scrollTop: window.innerHeight/2 + offset.top
+            });
+          }
 
           $scope.steps[step].preFn && $scope.steps[step].preFn();
 
