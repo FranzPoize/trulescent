@@ -66,7 +66,7 @@ angular.module('trulescent')
           $scope.$emit('tlsc.end');
         };
 
-        function moveTooltip (newValue,selector) {
+        function moveTooltip (newValue,selector,offset) {
           var cssValues,
             targetElement = document.querySelector(selector),
             elAbsPosition = tlscTools.cumulativeOffset(targetElement);
@@ -74,32 +74,32 @@ angular.module('trulescent')
           switch( newValue ) {
             case 'top' :
               cssValues = {
-                bottom: (window.innerHeight - elAbsPosition.top + 10) + 'px',
-                left: (elAbsPosition.left) + 'px',
+                bottom: (window.innerHeight - elAbsPosition.top + offset.bottom + 10) + 'px',
+                left: (elAbsPosition.left + offset.left) + 'px',
                 top: 'auto',
                 right: 'auto'
               }
               break;
             case 'right':
               cssValues = {
-                top: (elAbsPosition.top) + 'px',
-                left: (elAbsPosition.left + targetElement.clientWidth - 10) + 'px',
+                top: (elAbsPosition.top + offset.top) + 'px',
+                left: (elAbsPosition.left + targetElement.clientWidth + offset.left - 10) + 'px',
                 bottom: 'auto',
                 right: 'auto'
               }
               break;
             case 'bottom' :
               cssValues = {
-                top: (elAbsPosition.top + targetElement.clientHeight + 10) + 'px',
-                left: (elAbsPosition.left) + 'px',
+                top: (elAbsPosition.top + targetElement.clientHeight + offset.top + 10) + 'px',
+                left: (elAbsPosition.left + offset.left) + 'px',
                 bottom: 'auto',
                 right: 'auto'
               }
               break;
             case 'left' :
               cssValues = {
-                top: (elAbsPosition.top) + 'px',
-                right: (window.innerWidth - elAbsPosition.left - targetElement.clientWidth + 10) + 'px',
+                top: (elAbsPosition.top + offset.top) + 'px',
+                right: (window.innerWidth - elAbsPosition.left - targetElement.clientWidth + offset.right + 10) + 'px',
                 bottom: 'auto',
                 left: 'auto'
               }
@@ -121,7 +121,7 @@ angular.module('trulescent')
             $element.css('opacity',0);
 
             $timeout( function () {
-              moveTooltip(newValue.tooltip.placement,newValue.location.selector);
+              moveTooltip(newValue.tooltip.placement,newValue.location.selector,newValue.tooltip.offset || {top:0,left:0,right:0,bottom:0});
               $element.css('opacity', 1);
             }, tlscTools.animationDurationMilli);
 
