@@ -206,8 +206,8 @@ angular.module('trulescent')
 
           if (!step.noScroll) {
             angular.element(document.querySelector('body')).animate({
-              scrollTop: window.innerHeight/2 + offset.top
-            });
+              scrollTop: offset.top
+            }, tlscTools.animationDurationMilli);
           }
 
           $scope.steps[step].preFn && $scope.steps[step].preFn();
