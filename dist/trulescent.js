@@ -74,7 +74,7 @@ angular.module('trulescent')
           switch( newValue ) {
             case 'top' :
               cssValues = {
-                bottom: (window.innerHeight - elAbsPosition.top + (offset.bottom || 0)+ 10) + 'px',
+                bottom: (window.innerHeight - elAbsPosition.top + (offset.bottom || 0) + 10) + 'px',
                 left: (elAbsPosition.left + (offset.left|| 0)) + 'px',
                 top: 'auto',
                 right: 'auto'
@@ -83,14 +83,14 @@ angular.module('trulescent')
             case 'right':
               cssValues = {
                 top: (elAbsPosition.top + (offset.top|| 0)) + 'px',
-                left: (elAbsPosition.left + targetElement.clientWidth + (offset.left || 0)- 10) + 'px',
+                left: (elAbsPosition.left + targetElement.clientWidth + (offset.left || 0) + 10) + 'px',
                 bottom: 'auto',
                 right: 'auto'
               }
               break;
             case 'bottom' :
               cssValues = {
-                top: (elAbsPosition.top + targetElement.clientHeight + (offset.top || 0)+ 10) + 'px',
+                top: (elAbsPosition.top + targetElement.clientHeight + (offset.top || 0) + 10) + 'px',
                 left: (elAbsPosition.left + (offset.left|| 0)) + 'px',
                 bottom: 'auto',
                 right: 'auto'
@@ -99,7 +99,7 @@ angular.module('trulescent')
             case 'left' :
               cssValues = {
                 top: (elAbsPosition.top + (offset.top|| 0)) + 'px',
-                right: (window.innerWidth - elAbsPosition.left + (offset.right || 0)+ 10) + 'px',
+                right: (window.innerWidth - elAbsPosition.left + (offset.right || 0) + 10) + 'px',
                 bottom: 'auto',
                 left: 'auto'
               }
