@@ -28,32 +28,32 @@ angular.module('trulescent')
           switch( newValue ) {
             case 'top' :
               cssValues = {
-                bottom: (window.innerHeight - elAbsPosition.top + offset.bottom + 10) + 'px',
-                left: (elAbsPosition.left + offset.left) + 'px',
+                bottom: (window.innerHeight - elAbsPosition.top + (offset.bottom || 0)+ 10) + 'px',
+                left: (elAbsPosition.left + (offset.left|| 0)) + 'px',
                 top: 'auto',
                 right: 'auto'
               }
               break;
             case 'right':
               cssValues = {
-                top: (elAbsPosition.top + offset.top) + 'px',
-                left: (elAbsPosition.left + targetElement.clientWidth + offset.left - 10) + 'px',
+                top: (elAbsPosition.top + (offset.top|| 0)) + 'px',
+                left: (elAbsPosition.left + targetElement.clientWidth + (offset.left || 0)- 10) + 'px',
                 bottom: 'auto',
                 right: 'auto'
               }
               break;
             case 'bottom' :
               cssValues = {
-                top: (elAbsPosition.top + targetElement.clientHeight + offset.top + 10) + 'px',
-                left: (elAbsPosition.left + offset.left) + 'px',
+                top: (elAbsPosition.top + targetElement.clientHeight + (offset.top || 0)+ 10) + 'px',
+                left: (elAbsPosition.left + (offset.left|| 0)) + 'px',
                 bottom: 'auto',
                 right: 'auto'
               }
               break;
             case 'left' :
               cssValues = {
-                top: (elAbsPosition.top + offset.top) + 'px',
-                right: (window.innerWidth - elAbsPosition.left - targetElement.clientWidth + offset.right + 10) + 'px',
+                top: (elAbsPosition.top + (offset.top|| 0)) + 'px',
+                right: (window.innerWidth - elAbsPosition.left + (offset.right || 0)+ 10) + 'px',
                 bottom: 'auto',
                 left: 'auto'
               }
