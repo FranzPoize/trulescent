@@ -98,6 +98,7 @@ The steps passed to the directive **MUST** be an array of object literals. Steps
 Each step **MUST** contain a ```tooltip``` and a ```location``` properties at least. It **CAN** also contain the ```transition```,```preFn``` and ```postFn```.
 
 * Tooltip
+
 |Name|Type|Default|Description|
 -------------------------------
 |content|string|none|Used in the basic template to provide text content to the tooltip|
