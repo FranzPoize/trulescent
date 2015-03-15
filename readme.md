@@ -100,7 +100,7 @@ Each step **MUST** contain a ```tooltip``` and a ```location``` properties at le
 * Tooltip
 
 |Name|Type|Default|Description|
--------------------------------
+|----|----|-------|-----------|
 |content|string|none|Used in the basic template to provide text content to the tooltip|
 |template|html|none|Define a specific template to be used for this step|
 |templateScope|object|none|Scope used in the specific template|
