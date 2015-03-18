@@ -112,7 +112,7 @@ angular.module('trulescent')
           if ( angular.isDefined( newValue ) ) {
 
             if ( newValue.tooltip.template ) {
-              var templateScope = angular.extend($scope.new(),newValue.tooltip.templateScope);
+              var templateScope = angular.extend($scope.$new(),newValue.tooltip.templateScope);
               $element.empty().append($compile(newValue.tooltip.template)(templateScope));
             } else {
               $element.empty().append($compile($templateCache.get("components/tooltip/tooltip.html"))($scope));
@@ -148,7 +148,8 @@ angular.module('trulescent')
       controller :'trulescentCtrl',
       link: function ( $scope, $element, $attrs ) {
         var stepIndex = 0,
-          animationDurationMilli = 200;
+          animationDurationMilli = 200,
+          hasAnimation = !!angular.element.prototype.animate;
 
         function setUpTransition( step ) {
           if ( step.transition.event ) {
@@ -205,9 +206,13 @@ angular.module('trulescent')
           var offset = tlscTools.cumulativeOffset(document.querySelector(selector));
 
           if (!step.noScroll) {
-            angular.element(document.querySelector('body')).animate({
-              scrollTop: offset.top + ( $scope.steps[step].scrollOffset || 0 )
-            }, tlscTools.animationDurationMilli);
+            if (hasAnimation) {
+              angular.element(document.querySelector('body')).animate({
+                scrollTop: offset.top + ( $scope.steps[step].scrollOffset || 0 )
+              }, tlscTools.animationDurationMilli);
+            } else {
+              document.querySelector('body').scrollTop = offset.top + ($scope.steps[step].scrollOffset || 0);
+            }
           }
 
           $scope.steps[step].preFn && $scope.steps[step].preFn();
@@ -279,7 +284,7 @@ try {
 }
 module.run(['$templateCache', function($templateCache) {
   $templateCache.put('components/tooltip/tooltip.html',
-    '<div class="tlsc-tooltip"><div class="tlsc-content panel-body">{{step.tooltip.content}}</div><button class="btn" ng-click="prevStep()">Back</button> <button class="btn" ng-click="nextStep()">Next</button> <button class="btn" ng-click="stop()">End</button></div>');
+    '<div class="tlsc-tooltip"><div class="tlsc-content panel-body">{{step.tooltip.content}}</div><button class="btn" id="tlsc-back-btn" ng-click="prevStep()">Back</button> <button class="btn" id="tlsc-next-btn" ng-click="nextStep()">Next</button> <button class="btn" id="tlsc-end-btn" ng-click="stop()">End</button></div>');
 }]);
 })();
 
