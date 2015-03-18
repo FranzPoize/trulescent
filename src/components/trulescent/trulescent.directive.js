@@ -9,7 +9,8 @@ angular.module('trulescent')
       controller :'trulescentCtrl',
       link: function ( $scope, $element, $attrs ) {
         var stepIndex = 0,
-          animationDurationMilli = 200;
+          animationDurationMilli = 200,
+          hasAnimation = !!angular.element.prototype.animate;
 
         function setUpTransition( step ) {
           if ( step.transition.event ) {
@@ -66,9 +67,13 @@ angular.module('trulescent')
           var offset = tlscTools.cumulativeOffset(document.querySelector(selector));
 
           if (!step.noScroll) {
-            angular.element(document.querySelector('body')).animate({
-              scrollTop: offset.top + ( $scope.steps[step].scrollOffset || 0 )
-            }, tlscTools.animationDurationMilli);
+            if (hasAnimation) {
+              angular.element(document.querySelector('body')).animate({
+                scrollTop: offset.top + ( $scope.steps[step].scrollOffset || 0 )
+              }, tlscTools.animationDurationMilli);
+            } else {
+              document.querySelector('body').scrollTop = offset.top + ($scope.steps[step].scrollOffset || 0);
+            }
           }
 
           $scope.steps[step].preFn && $scope.steps[step].preFn();
