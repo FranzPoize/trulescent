@@ -95,15 +95,15 @@ The step attributes will be used to configure the different steps of the trulesc
     ];
 ```
 
-* Steps array
+#### Steps array
 
 The steps passed to the directive **MUST** be an array of object literals. Steps will be ordered in the tutorial following there order in the steps array.
 
-* Step object literal
+#### Step object literal
 
 Each step **MUST** contain a ```tooltip``` and a ```location``` properties at least. It **CAN** also contain the ```transition```,```preFn``` and ```postFn```.
 
-* Tooltip
+#### Tooltip
 
 Here is an example of a tooltip object:
 ``` javascript
@@ -129,7 +129,7 @@ Here is an example of a tooltip object:
 |placement|string|none|Placement of the tooltip. Can be ```top```, ```left```, ```right``` or ```bottom```|
 |offset|object|none|Define different offset for tooltip placement|
 
-* Location
+#### Location
 
 Here is an example of a location object:
 ``` javascript
@@ -144,7 +144,7 @@ Here is an example of a location object:
 |selector|css selector|none|Specify the element the panel should show on this step|
 |zIndexSelector|css selector|none|If your element is an absolutely positioned element inside a relatively positioned element which happen to have a z-index you will have to provide the selector to this parent|
 
-* Watch transition
+#### Watch transition
 Here is an example of a watch transition object:
 ``` javascript
 {
@@ -152,7 +152,8 @@ Here is an example of a watch transition object:
   selector: '#test-stuff',
   afterValue : undefined,
   testValue: 'caca'
-},
+}
+```
 
 This transition will watch for the stuff properties the ```#test-stuff``` element's scope.
 
@@ -167,13 +168,15 @@ The stuff properties will then be set to ```undefined```.
 |afterValue|anything|none|Value the property will be set after the testValue is met|
 |testValue|anything|none|Value the watched property will tested against|
 
-* Event transition
+#### Event transition
 
 Here is an example of an event transition object:
+``` javascript
 {
   event:'click',
   selector:'#btn-tlsc-test'
 }
+```
 
 This transition will watch for an event on a specific element and when this event is trigger go to the next step.
 
