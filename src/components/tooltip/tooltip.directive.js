@@ -66,7 +66,7 @@ angular.module('trulescent')
           if ( angular.isDefined( newValue ) ) {
 
             if ( newValue.tooltip.template ) {
-              var templateScope = angular.extend($scope.new(),newValue.tooltip.templateScope);
+              var templateScope = angular.extend($scope.$new(),newValue.tooltip.templateScope);
               $element.empty().append($compile(newValue.tooltip.template)(templateScope));
             } else {
               $element.empty().append($compile($templateCache.get("components/tooltip/tooltip.html"))($scope));
