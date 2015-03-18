@@ -29,7 +29,7 @@ You will have to add the trulescent directive in the ```<body>``` element of you
 <div trulescent steps="steps" start="startTlsc"></div>
 ```
 
-The step attributes will be used to configure the different steps of the trulescent tutorial. The start attributes will launch the trulescent tutorial when it is equal to true.
+The steps attribute will be used to configure the different steps of the trulescent tutorial. The start attribute will launch the trulescent tutorial when it is equal to true.
 
 ### Steps config
 ``` javascript
