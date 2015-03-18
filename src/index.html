@@ -42,7 +42,7 @@
         <input type="text" ng-model="stuff"></input>
       </div>
 
-      <button class="btn" ng-click="go()">Go</button>
+      <button class="btn" id="go-btn" ng-click="go()">Go</button>
 
       <div class="col" ng-repeat="awesomeThing in awesomeThings | orderBy:'rank'">
         <div class="thumbnail">
