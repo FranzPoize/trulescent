@@ -57,54 +57,63 @@ angular.module('trulescent')
       awesomeThing.rank = Math.random();
     });
 
-    $scope.steps = [
+    $scope.stepsPlacement = [
       {
         tooltip: {
-          content:'yop',
-          template:'<div class="tlsc-tooltip"><div>{{content}} de la balle</div><button class="btn" ng-click="prevStep()">Back</button><button class="btn" ng-click="nextStep()">Next</button><button class="btn" ng-click="stop()">End</button></div>',
+          content:'0',
           placement: 'top'
         },
         location: {
           selector:'.thumbnail'
         },
-        transition: {
-          event:'click',
-          selector:'#btn-tlsc-test'
-        }
       },
       {
         tooltip: {
-          content:'jumbotron',
+          content:'0',
+          placement: 'right'
+        },
+        location: {
+          selector:'.thumbnail'
+        },
+      },
+      {
+        tooltip: {
+          content:'0',
+          placement: 'bottom'
+        },
+        location: {
+          selector:'.thumbnail'
+        },
+      },
+      {
+        tooltip: {
+          content:'1',
+          placement:'left',
+        },
+        location: {
+          selector:'.thumbnail'
+        }
+      }
+    ];
+
+    $scope.steps = [
+      {
+        tooltip: {
+          content:'0',
+          placement: 'top'
+        },
+        scrollOffset: -100,
+        location: {
+          selector:'.thumbnail'
+        },
+      },
+      {
+        tooltip: {
+          content:'1',
           placement:'bottom',
         },
         location: {
           selector:'.jumbotron'
-        },
-        transition: {
-          watch:'stuff',
-          selector: '#test-stuff',
-          afterValue : undefined,
-          testValue: 'caca'
-        },
-        preFn:function() {
-          console.log('pre');
-        },
-        postFn: function() {
-          console.log('post');
-        }
-      },
-      {
-        tooltip: {
-          content:'yop',
-          template:'<div class="tlsc-tooltip"><div>{{content}} de la balle</div><button class="btn" ng-click="prevStep()">Back</button><button class="btn" ng-click="nextStep()">Next</button><button class="btn" ng-click="stop()">End</button></div>',
-          placement: 'top'
-        },
-        location: {
-          selector:'.thumbnail'
-        },
-        transition: {
-          event:'click',
-          selector:'#btn-tlsc-test'
         }
       }
     ];
